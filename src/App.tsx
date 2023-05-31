@@ -1,6 +1,7 @@
-import React, {useEffect, useState} from 'react';
+import React, {ChangeEvent, useEffect, useState} from 'react';
 import './App.css';
 import Button from "./Button";
+import Input from "./Input";
 
 function App() {
     const [value, setValue] = useState<number>(0)
@@ -15,13 +16,10 @@ function App() {
 
     const incHandler = () => {
         setValue(value + 1)
-        // setToLocalStorageHandler()
     }
 
     const resHandler = () => {
         setValue(0)
-        // clearLocalStorageHandler()
-
     }
 
     const setToLocalStorageHandler = () => {
@@ -37,18 +35,23 @@ function App() {
         }
     }
 
-    const clearLocalStorageHandler = () => {
-        localStorage.clear()
+    // const clearLocalStorageHandler = () => {
+    //     localStorage.clear()
+    // }
+
+    const onchangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        let inputValue = JSON.parse(e.currentTarget.value)
+        setValue(inputValue)
     }
 
     console.log(value)
     return (
         <div className="App">
             <div className="btn">
+                <Input value={value} callback={onchangeHandler}/>
                 <Button name={'inc'} callback={incHandler}/>
                 <Button name={'res'} callback={resHandler}/>
                 <Button name={'set'} callback={setToLocalStorageHandler}/>
-                {/*<Button name={'get'} callback={getFromLocalStorageHandler}/>*/}
             </div>
             {value}
         </div>
