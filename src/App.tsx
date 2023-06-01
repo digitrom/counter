@@ -6,11 +6,11 @@ import Input from "./Input";
 function App() {
     const [value, setValue] = useState<number>(0)
 
-    useEffect(()=> {
+    useEffect(() => {
         getFromLocalStorageHandler()
     }, [])
 
-    useEffect(()=> {
+    useEffect(() => {
         setToLocalStorageHandler()
     }, [value])
 
@@ -23,7 +23,7 @@ function App() {
     }
 
     const setToLocalStorageHandler = () => {
-        localStorage.setItem('counterValue', JSON.stringify(value) )
+        localStorage.setItem('counterValue', JSON.stringify(value))
     }
 
     const getFromLocalStorageHandler = () => {
@@ -47,13 +47,26 @@ function App() {
     console.log(value)
     return (
         <div className="App">
-            <div className="btn">
-                <Input value={value} callback={onchangeHandler}/>
-                <Button name={'inc'} callback={incHandler}/>
-                <Button name={'res'} callback={resHandler}/>
-                <Button name={'set'} callback={setToLocalStorageHandler}/>
+            <div className={'inputWrapper'}>
+                <div className={'inputValue'}>
+                    <div className={'text'}>max value:</div>
+                    <div className={'input'}><Input value={value} callback={onchangeHandler}/></div>
+                </div>
+                <div className={'inputValue'}>
+                    <div className={'text'}>start value:</div>
+                    <div className={'input'}><Input value={value} callback={onchangeHandler}/></div>
+                </div>
+                <div className={'btnWrapper'}><Button name={'res'} callback={resHandler}/></div>
             </div>
-            {value}
+            <div className={'counterWrapper'}>
+                <div className={'value'}>
+                    {value}
+                </div>
+                <div className="btnWrapper">
+                    <div className={'btn'}><Button name={'inc'} callback={incHandler}/></div>
+                    <div className={'btn'}><Button name={'set'} callback={setToLocalStorageHandler}/></div>
+                </div>
+            </div>
         </div>
     );
 }
